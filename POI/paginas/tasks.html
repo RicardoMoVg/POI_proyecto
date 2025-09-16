@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas - FIFA 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/tasks.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-img">F26</div>
+                <div class="logo-text">Copa Mundial 2026</div>
+            </div>
+            <ul class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="tournament.html">Torneo</a>
+                <a href="chat.html">Chat</a>
+                <a href="tasks.html">Tareas</a>
+                <a href="rewards.html">Recompensas</a>
+                <a href="login.html">Cerrar Sesión</a>
+
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="loginBtn"><i class="login.html"></i> Iniciar Sesión</button>
+                <button class="btn btn-primary" id="registerBtn"><i class="register.html"></i> Registrarse</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Gestión de Tareas del Grupo</h1>
+            <p>Organiza y asigna tareas para preparar el mejor mundial de la historia</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Mi Perfil</h3>
+                <div class="user-status">
+                    <span class="status-online">●</span>
+                    <span>Nivel: 15</span>
+
+                </div>
+                <div class="user-status">
+                    <span>🏆</span>
+                    <span>Puntos: 1,250</span>
+                </div>
+                <br>
+                <ul class="sidebar-menu">
+                    <li><a href="userprofile.html">Perfil de usuario</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Menú</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="chat.html"><span>⚽</span> Chat</a></li>
+                    <li><a href="tournament.html"><span>🏆</span> Torneos</a></li>
+                    <li><a href="rewards.html"><span>⭐</span> Recompensas</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Logros</h3>
+                <ul class="sidebar-menu">
+                    <li><span>🥇</span> Insignias: 5</li>
+                    <li><span>🎯</span> Precisión: 78%</li>
+                    <li><span>⚡</span> Racha: 3 aciertos</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content-area">
+            <div class="tab-container">
+                <ul class="tabs">
+                    <li><a href="#" class="tab-link active" data-tab="homework">Tareas</a></li>
+                    <li><a href="#" class="tab-link" data-tab="Myhomework">Mi tarea</a></li>
+                    <li><a href="#" class="tab-link" data-tab="schedule">Calendario</a></li>
+                </ul>
+            </div>
+
+            <!-- Tareas -->
+            <div id="homework" class="tasks-container  tab-content active">
+                <div class="tasks-header">
+                    <h2 class="tasks-title">Tareas del Grupo</h2>
+                    <div class="tasks-stats">
+                        <div class="stat">
+                            <i class="fas fa-tasks"></i>
+                            <span>15 tareas</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-check-circle"></i>
+                            <span>8 completadas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="task-form">
+                    <input type="text" class="task-input" placeholder="Nueva tarea...">
+                    <select class="task-select">
+                        <option>Asignar a: Todos</option>
+                        <option>Juan Pérez</option>
+                        <option>María García</option>
+                        <option>Carlos López</option>
+                        <option>Ana Martínez</option>
+                    </select>
+                    <select class="task-select">
+                        <option>Prioridad: Normal</option>
+                        <option>Alta</option>
+                        <option>Media</option>
+                        <option>Baja</option>
+                    </select>
+                    <button class="add-btn">Agregar</button>
+                </div>
+
+                <div class="tasks-list">
+                    <div class="tasks-list-header">
+                        <h3>Tareas Pendientes</h3>
+                        <div class="filter-options">
+                            <button class="filter-btn active">Todas</button>
+                            <button class="filter-btn">Asignadas a mí</button>
+                            <button class="filter-btn">Prioridad</button>
+                        </div>
+                    </div>
+
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-content">
+                            <div class="task-text">Investigar estadios mundial 2026</div>
+                            <div class="task-meta">
+                                <div class="assignee">
+                                    <i class="fas fa-user"></i>
+                                    <span>Asignada a: Juan Pérez</span>
+                                </div>
+                                <div class="priority high">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Alta</span>
+                                </div>
+                                <div class="task-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>Vence: 15/12/2027</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-content">
+                            <div class="task-text">Preparar presentación de grupos y equipos</div>
+                            <div class="task-meta">
+                                <div class="assignee">
+                                    <i class="fas fa-user"></i>
+                                    <span>Asignada a: María García</span>
+                                </div>
+                                <div class="priority medium">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Media</span>
+                                </div>
+                                <div class="task-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>Vence: 20/12/2026</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-content">
+                            <div class="task-text">Recopilar estadísticas de jugadores clave</div>
+                            <div class="task-meta">
+                                <div class="assignee">
+                                    <i class="fas fa-user"></i>
+                                    <span>Asignada a: Carlos López</span>
+                                </div>
+                                <div class="priority low">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Baja</span>
+                                </div>
+                                <div class="task-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>Vence: 10/01/2026</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="task-item completed">
+                        <input type="checkbox" class="task-checkbox" checked>
+                        <div class="task-content">
+                            <div class="task-text">Crear calendario de partidos de la fase de grupos</div>
+                            <div class="task-meta">
+                                <div class="assignee">
+                                    <i class="fas fa-user"></i>
+                                    <span>Asignada a: Ana Martínez</span>
+                                </div>
+                                <div class="priority high">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Alta</span>
+                                </div>
+                                <div class="task-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>Completada: 05/12/2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="task-item completed">
+                        <input type="checkbox" class="task-checkbox" checked>
+                        <div class="task-content">
+                            <div class="task-text">Diseñar logos para los equipos de fantasía</div>
+                            <div class="task-meta">
+                                <div class="assignee">
+                                    <i class="fas fa-user"></i>
+                                    <span>Asignada a: Todos</span>
+                                </div>
+                                <div class="priority medium">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Media</span>
+                                </div>
+                                <div class="task-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>Completada: 01/12/2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mis tareas -->
+
+            <div id="Myhomework"  class="tasks-container tab-content">
+                <div class="tasks-header">
+                    <h2 class="tasks-title">Mis tareas</h2>
+                    <div class="tasks-stats">
+                        <div class="stat">
+                            <i class="fas fa-tasks"></i>
+                            <span>7 tareas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="task-form">
+                    <input type="text" class="task-input" placeholder="Nueva tarea...">
+                    <select class="task-select">
+                        <option>Prioridad: Normal</option>
+                        <option>Alta</option>
+                        <option>Media</option>
+                        <option>Baja</option>
+                    </select>
+                    <button class="add-btn">Agregar</button>
+                </div>
+
+                <div class="tasks-list">
+                    <div class="tasks-list-header">
+                        <h3>Tareas realizadas</h3>
+                        <div class="filter-options">
+                            <button class="filter-btn active">Todas</button>
+                        </div>
+                    </div>
+
+                    <div class="task-item completed">
+                        <input type="checkbox" class="task-checkbox" checked>
+                        <div class="task-content">
+                            <div class="task-text">Investigar el mejor jugador del futboll en 1990</div>
+                            <div class="task-meta">
+                                <div class="assignee">
+                                    <i class="fas fa-user"></i>
+                                    <span>Asignada a: Usuario</span>
+                                </div>
+                                <div class="priority high">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Alta</span>
+                                </div>
+                                <div class="task-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>Completada: 15/09/2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="task-item completed">
+                        <input type="checkbox" class="task-checkbox" checked>
+                        <div class="task-content">
+                            <div class="task-text">Preparar presentación de grupos y equipos</div>
+                            <div class="task-meta">
+                                <div class="assignee">
+                                    <i class="fas fa-user"></i>
+                                    <span>Asignada a: Usuario</span>
+                                </div>
+                                <div class="priority medium">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Media</span>
+                                </div>
+                                <div class="task-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>Completada: 20/09/2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="task-item completed">
+                        <input type="checkbox" class="task-checkbox" checked>
+                        <div class="task-content">
+                            <div class="task-text">Crear calendario de partidos de la fase de grupos</div>
+                            <div class="task-meta">
+                                <div class="assignee">
+                                    <i class="fas fa-user"></i>
+                                    <span>Asignada a: Usuario</span>
+                                </div>
+                                <div class="priority high">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Alta</span>
+                                </div>
+                                <div class="task-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>Completada: 05/09/2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="task-item completed">
+                        <input type="checkbox" class="task-checkbox" checked>
+                        <div class="task-content">
+                            <div class="task-text">Diseñar logos para los equipos de fantasía</div>
+                            <div class="task-meta">
+                                <div class="assignee">
+                                    <i class="fas fa-user"></i>
+                                    <span>Asignada a: Todos</span>
+                                </div>
+                                <div class="priority medium">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Media</span>
+                                </div>
+                                <div class="task-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>Completada: 01/09/2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendario -->
+
+            <div id="schedule"  class="tasks-container tab-content">
+                <div class="tasks-header">
+                    <h2 class="tasks-title">Calendario</h2>
+                </div>
+
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button class="nav-btn" id="prevMonth">‹</button>
+                        <div class="month-year">
+                            <div class="month-name" id="monthName">enero</div>
+                            <div class="year-name" id="yearName">2025</div>
+                        </div>
+                        <button class="nav-btn" id="nextMonth">›</button>
+                    </div>
+
+                    <div class="calendar-grid">
+                        <div class="day-header">Dom</div>
+                        <div class="day-header">Lun</div>
+                        <div class="day-header">Mar</div>
+                        <div class="day-header">Mié</div>
+                        <div class="day-header">Jue</div>
+                        <div class="day-header">Vie</div>
+                        <div class="day-header">Sáb</div>
+
+                        <!-- Los días se generarán dinámicamente -->
+                    </div>
+
+                    <div class="calendar-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background: #00ff88;"></div>
+                            <span>Evento General</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background: #ff6b6b;"></div>
+                            <span>Partido</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background: #ffd700;"></div>
+                            <span>Torneo</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot"
+                                style="background: linear-gradient(45deg, #00ff88, #00d4ff); width: 12px; height: 12px; border-radius: 2px;">
+                            </div>
+                            <span>Hoy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal para eventos -->
+                <div class="event-modal" id="eventModal">
+                    <div class="modal-content">
+                        <div class="modal-header" id="modalHeader">Evento del Día</div>
+                        <div class="modal-body" id="modalBody">
+                            <p>Información del evento seleccionado.</p>
+                        </div>
+                        <button class="modal-close" onclick="closeModal()">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Proyecto de Programación Orientada a Internet - Grupo 051 - Agosto-Diciembre 2025</p>
+            <p>Lic. en Multimedia y Animación Digital - FCFM UANL</p>
+            <p>Primer Avance: Diseño y Maquetación de Interfaz</p>
+        </div>
+    </footer>
+
+    <script src="../js/tasks.js"></script>
+
+
+</body>
+
+</html>

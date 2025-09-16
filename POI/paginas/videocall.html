@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videollamada - FIFA 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --fifa-blue: #0066b3;
+            --fifa-yellow: #ffcc00;
+            --fifa-green: #009639;
+            --fifa-red: #e2001a;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --chat-width: 320px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--fifa-blue) 0%, #003b6f 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: var(--fifa-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--fifa-blue);
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--fifa-yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--fifa-yellow);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--fifa-yellow);
+            color: var(--fifa-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: #e6b800;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--fifa-yellow);
+            color: var(--fifa-yellow);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--fifa-yellow);
+            color: var(--fifa-blue);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-section h3 {
+            color: var(--fifa-blue);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--fifa-yellow);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: #f0f0f0;
+            color: var(--fifa-blue);
+        }
+
+        /* Video Call Container */
+        .video-call-container {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .call-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .call-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--fifa-blue);
+        }
+
+        .call-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #666;
+        }
+
+        .participants-count {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .video-item {
+            position: relative;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            box-shadow: var(--shadow);
+        }
+
+        .video-item.main-video {
+            grid-column: 1 / -1;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2c3e50, #1a1a1a);
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--fifa-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .video-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 15px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--fifa-green);
+        }
+
+        /* Call Controls */
+        .call-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 2rem;
+        }
+
+        .control-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .control-btn.primary {
+            background-color: var(--fifa-blue);
+            color: white;
+        }
+
+        .control-btn.secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .control-btn.danger {
+            background-color: var(--fifa-red);
+            color: white;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Participants Panel */
+        .participants-panel {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .participants-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .participant {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .participant:hover {
+            background-color: #f9f9f9;
+        }
+
+        .participant-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--fifa-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .participant-info {
+            flex: 1;
+        }
+
+        .participant-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .participant-role {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--text-light);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-img">F26</div>
+                <div class="logo-text">Copa Mundial 2026</div>
+            </div>
+            <ul class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="tournament.html">Torneo</a>
+                <a href="chat.html">Chat</a>
+                <a href="tasks.html">Tareas</a>
+                <a href="rewards.html">Recompensas</a>
+                <a href="login.html">Cerrar Sesión</a>
+
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="loginBtn"><i class="login.html"></i> Iniciar Sesión</button>
+                <button class="btn btn-primary" id="registerBtn"><i class="register.html"></i> Registrarse</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="sidebar-section">
+                <h3>Mi perfil</h3>
+                <ul class="sidebar-menu">
+                    <li><span class="status-online">●</span> Nivel: 15</li>
+                    <li><span>🏆</span> Puntos: 1,250</li>
+                    <li><a href="userprofile.html">Perfil de usuario</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Menú</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="chat.html"><span>⚽</span> Chat</a></li>
+                    <li><a href="tournament.html"><span>🏆</span> Torneos</a></li>
+                    <li><a href="rewards.html"><span>⭐</span> Recompensas</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Logros</h3>
+                <ul class="sidebar-menu">
+                    <li><span>🥇</span> Insignias: 5</li>
+                    <li><span>🎯</span> Precisión: 78%</li>
+                    <li><span>⚡</span> Racha: 3 aciertos</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Video Call Content -->
+        <main class="video-call-container">
+            <div class="call-header">
+                <div class="call-title">
+                    <i class="fas fa-video"></i>
+                    <h2>Análisis Argentina vs Francia - Final del Mundo</h2>
+                </div>
+                <div class="call-info">
+                    <div class="participants-count">
+                        <i class="fas fa-users"></i>
+                        <span>8 participantes</span>
+                    </div>
+                    <div class="call-time">
+                        <i class="fas fa-clock"></i>
+                        <span>02:45:12</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-grid">
+                <div class="video-item main-video">
+                    <div class="video-placeholder">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="user-name">
+                            <span class="user-status"></span>
+                            <span>Juan Villarreal (Anfitrión)</span>
+                        </div>
+                        <div class="audio-indicator">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-placeholder">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="user-name">
+                            <span class="user-status"></span>
+                            <span>Ronaldo Fan</span>
+                        </div>
+                        <div class="audio-indicator">
+                            <i class="fas fa-microphone-slash"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-placeholder">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="user-name">
+                            <span class="user-status"></span>
+                            <span>Lionel Messi Fan</span>
+                        </div>
+                        <div class="audio-indicator">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="call-controls">
+                <button class="control-btn secondary">
+                    <i class="fas fa-microphone-slash"></i>
+                </button>
+                <button class="control-btn secondary">
+                    <i class="fas fa-video-slash"></i>
+                </button>
+                <button class="control-btn primary">
+                    <i class="fas fa-users"></i>
+                </button>
+                <button class="control-btn secondary">
+                    <i class="fas fa-desktop"></i>
+                </button>
+                <button class="control-btn danger">
+                    <i class="fas fa-phone-slash"></i>
+                </button>
+            </div>
+
+            <div class="participants-panel">
+                <div class="panel-header">
+                    <h3>Participantes</h3>
+                    <span>8/10</span>
+                </div>
+
+                <div class="participants-list">
+                    <div class="participant">
+                        <div class="participant-avatar">JV</div>
+                        <div class="participant-info">
+                            <div class="participant-name">Juan Villarreal</div>
+                            <div class="participant-role">Anfitrión</div>
+                        </div>
+                        <div class="participant-status">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                    </div>
+
+                    <div class="participant">
+                        <div class="participant-avatar">RF</div>
+                        <div class="participant-info">
+                            <div class="participant-name">Ronaldo Fan</div>
+                            <div class="participant-role">Panelista</div>
+                        </div>
+                        <div class="participant-status">
+                            <i class="fas fa-microphone-slash"></i>
+                        </div>
+                    </div>
+
+                    <div class="participant">
+                        <div class="participant-avatar">LF</div>
+                        <div class="participant-info">
+                            <div class="participant-name">Lionel Messi Fan</div>
+                            <div class="participant-role">Invitado Especial</div>
+                        </div>
+                        <div class="participant-status">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                    </div>
+
+                    <div class="participant">
+                        <div class="participant-avatar">DF</div>
+                        <div class="participant-info">
+                            <div class="participant-name">Diego Forlán</div>
+                            <div class="participant-role">Panelista</div>
+                        </div>
+                        <div class="participant-status">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Proyecto de Programación Orientada a Internet - Grupo 051 - Agosto-Diciembre 2025</p>
+            <p>Lic. en Multimedia y Animación Digital - FCFM UANL</p>
+            <p>Primer Avance: Diseño y Maquetación de Interfaz</p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recompensas - FIFA 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/rewards.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-img">F26</div>
+                <div class="logo-text">Copa Mundial 2026</div>
+            </div>
+            <ul class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="tournament.html">Torneo</a>
+                <a href="chat.html">Chat</a>
+                <a href="tasks.html">Tareas</a>
+                <a href="rewards.html">Recompensas</a>
+                <a href="login.html">Cerrar Sesión</a>
+
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="loginBtn"><i class="login.html"></i> Iniciar Sesión</button>
+                <button class="btn btn-primary" id="registerBtn"><i class="register.html"></i> Registrarse</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Sistema de Recompensas FIFA 2026</h1>
+            <p>Gana insignias y premios exclusivos por tus predicciones y conocimientos futbolísticos</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Mi Perfil</h3>
+                <div class="user-status">
+                    <span class="status-online">●</span>
+                    <span>Nivel: 15</span>
+                </div>
+                <div class="user-status">
+                    <span>🏆</span>
+                    <span>Puntos: 1,250</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Menú</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="chat.html"><span>⚽</span> Chat</a></li>
+                    <li><a href="tournament.html"><span>🏆</span> Torneos</a></li>
+                    <li><a href="rewards.html"><span>⭐</span> Recompensas</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Logros</h3>
+                <ul class="sidebar-menu">
+                    <li><span>🥇</span> Insignias: 5</li>
+                    <li><span>🎯</span> Precisión: 78%</li>
+                    <li><span>⚡</span> Racha: 3 aciertos</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content-area">
+            <div class="tab-container">
+                <ul class="tabs">
+                    <li><a href="#" class="tab-link active" data-tab="insignias">Insignia</a></li>
+                    <li><a href="#" class="tab-link" data-tab="premios">Premios</a></li>
+                    <li><a href="#" class="tab-link" data-tab="desafios">Desafios</a></li>
+                </ul>
+            </div>
+
+            <!-- Insignias -->
+
+            <div id="insignias" class="rewards-container tab-content active">
+                <div class="rewards-header">
+                    <h2 class="rewards-title">Insignias Disponibles</h2>
+                    <div class="progress-container">
+                        <span class="progress-text">Progreso: 5/12 insignias</span>
+                    </div>
+                </div>
+
+                <div class="badges-grid">
+                    <div class="badge">
+                        <div class="badge-icon">🥇</div>
+                        <h3>Goleador</h3>
+                        <p>Por predecir 10 resultados exactos</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🔮</div>
+                        <h3>Vidente</h3>
+                        <p>Por acertar el campeón del torneo</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🎯</div>
+                        <h3>Precisión</h3>
+                        <p>Por tener 85% de predicciones correctas</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">⚡</div>
+                        <h3>Rápido</h3>
+                        <p>Por hacer 5 predicciones en menos de 1 minuto</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🌎</div>
+                        <h3>Global</h3>
+                        <p>Por predecir partidos de todos los grupos</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🏅</div>
+                        <h3>Experto</h3>
+                        <p>Por alcanzar el top 100 en la clasificación</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premios -->
+
+            <div id="premios" class="rewards-container tab-content">
+                <div class="rewards-header">
+                    <h2 class="rewards-title">Premios</h2>
+                    <div class="progress-container">
+                        <span class="progress-text">Total: 10 premios</span>
+                    </div>
+                </div>
+
+                <div class="badges-grid">
+                    <div class="badge">
+                        <div class="badge-icon">⚡</div>
+                        <h3>Mejoras</h3>
+                        <p>Modo turbo</p>
+                        <p>+25% velocidad todo el equipo</p>
+                        <span class="progress-text">Uso en 3 partidos</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">⚔</div>
+                        <h3>Defensa impenetrable</h3>
+                        <p>Bloquea 70% <br>de ataques rivales</p>
+                        <span class="progress-text">Usos en 5 partidos</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🎯</div>
+                        <h3>Precisión láser</h3>
+                        <p>95% Precisión de tiro</p>
+                        <span class="progress-text">Usos en 2 partidos</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">💰</div>
+                        <h3>Monedas</h3>
+                        <p>Moneda de oro</p>
+                        <span class="progress-text">Compra 100 monedas a tan solo $69</span>
+                        <button class="win-btn">Comprar</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">💎</div>
+                        <h3>Gema especial</h3>
+                        <p>Para obtener <br> equipamiento exclusivo </p>
+                        <span class="progress-text">Compra 10 gemas a tan solo $199</span>
+                        <button class="win-btn">Comprar</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">👔</div>
+                        <h3>Equipamiento</h3>
+                        <p>Camiseta Retro Brasil 70</p>
+                        <p>Legendaria camiseta amarilla</p>
+                        <span class="progress-text">Nivel: Legendario</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">👟</div>
+                        <h3>Calzado</h3>
+                        <p>Botas de velocidad</p>
+                        <p>+15% velocidad por 5 partidos</p>
+                        <span class="progress-text">Nivel: Épica</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">⚽</div>
+                        <h3>Balón FIFA Mundial</h3>
+                        <p>Balón oficial con efectos <br> especiales en el partido</p>
+                        <span class="progress-text">Nivel: Rara</span>
+                        
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🃏</div>
+                        <h3>Carta especial</h3>
+                        <p>Messi GOAT</p>
+                        <p>Carta especial del mejor</p>
+                        <span class="progress-text">Nivel: Legendario</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🏟</div>
+                        <h3>Ambiente</h3>
+                        <p>Wembley</p>
+                        <p>Ambiente de final épica</p>
+                        <span class="progress-text">Nivel: Rara</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desafios -->
+
+            <div id="desafios" class="rewards-container tab-content">
+                <div class="rewards-header">
+                    <h2 class="rewards-title">Desafíos</h2>
+                    <div class="progress-container">
+                        <span class="progress-text">Retos por lograr: 6</span>
+                    </div>
+                </div>
+
+                <div class="badges-grid">
+
+                    <!-- Regates -->
+                    <div class="badge">
+                        <div class="badge-icon">⚡</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Velocidad Pura</div>
+                            <span class="badge-type type-daily">Diario</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Completa 15 regates exitosos en un solo partido. Demuestra tu habilidad con el balón.
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Regates completados</span>
+                                <span>8/15</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 53%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">Boost velocidad</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                    <!-- Pases -->
+                    <div class="badge">
+                        <div class="badge-icon">🎯</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Maestro del Pase</div>
+                            <span class="badge-type type-daily">Diario</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Realiza 20 pases acertados en un solo partido. Juega en equipo y mantén la posesión.
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Pases completados</span>
+                                <span>12/20</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 60%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">+ Precisión</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                    <!-- Tiros a puerta -->
+                    <div class="badge">
+                        <div class="badge-icon">🥅</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Puntería Letal</div>
+                            <span class="badge-type type-weekly">Semanal</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Dispara 10 veces a portería en un partido. No importa si marcas, ¡lo importante es
+                            intentarlo!
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Tiros realizados</span>
+                                <span>4/10</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 40%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">+ Potencia de tiro</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                    <!-- Recuperaciones -->
+                    <div class="badge">
+                        <div class="badge-icon">🛡️</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Muralla Defensiva</div>
+                            <span class="badge-type type-daily">Diario</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Recupera 5 balones en defensa durante un partido. Sé firme y protege tu área.
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Recuperaciones</span>
+                                <span>2/5</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 40%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">+ Resistencia</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                    <!-- Resistencia -->
+                    <div class="badge">
+                        <div class="badge-icon">🏃‍♂️</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Corazón Incansable</div>
+                            <span class="badge-type type-weekly">Semanal</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Corre 5 km acumulados en un partido. Mantente activo de principio a fin.
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Kilómetros recorridos</span>
+                                <span>3/5</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 60%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">+ Energía</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                    <!-- Centros -->
+                    <div class="badge">
+                        <div class="badge-icon">📐</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Centrador Preciso</div>
+                            <span class="badge-type type-daily">Diario</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Realiza 5 centros correctos al área en un partido. Abre el juego por las bandas.
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Centros completados</span>
+                                <span>1/5</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 20%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">+ Técnica</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget chat-expanded">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-comments"></i>
+                <span>Chat en Vivo</span>
+                <span class="online-indicator"></span>
+                <span class="online-count">(24)</span>
+            </div>
+            <button class="chat-toggle">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+        <div class="chat-messages">
+            <div class="message other">
+                <div class="sender">FutbolFan23 <span class="badge">🥇</span></div>
+                <div class="text">¡Argentina va a ganar el mundial!</div>
+                <div class="timestamp">Hace 2 min</div>
+            </div>
+            <div class="message self">
+                <div class="sender">Tú <span class="badge">🔮</span></div>
+                <div class="text">Yo creo que Brasil tiene más chances este año</div>
+                <div class="timestamp">Hace 1 min</div>
+            </div>
+            <div class="message other">
+                <div class="sender">PredicctorPro <span class="badge">🏅</span></div>
+                <div class="text">Acabo de conseguir la insignia Vidente 🔮</div>
+                <div class="timestamp">Hace 1 min</div>
+            </div>
+            <div class="message other">
+                <div class="sender">Messi10</div>
+                <div class="text">¿Alguien más cree que Brasil llegará a semifinales?</div>
+                <div class="timestamp">Ahora</div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Escribe un mensaje...">
+            <button><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Proyecto de Programación Orientada a Internet - Grupo 051 - Agosto-Diciembre 2025</p>
+            <p>Lic. en Multimedia y Animación Digital - FCFM UANL</p>
+            <p>Primer Avance: Diseño y Maquetación de Interfaz</p>
+        </div>
+    </footer>
+
+    <script src="../js/rewards.js"></script>
+</body>
+
+</html>

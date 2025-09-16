@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Privado - FIFA 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --fifa-blue: #0066b3;
+            --fifa-yellow: #ffcc00;
+            --fifa-green: #009639;
+            --fifa-red: #e2001a;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--fifa-blue) 0%, #003b6f 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: var(--fifa-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--fifa-blue);
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--fifa-yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--fifa-yellow);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--fifa-yellow);
+            color: var(--fifa-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: #e6b800;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--fifa-yellow);
+            color: var(--fifa-yellow);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--fifa-yellow);
+            color: var(--fifa-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230066b3" opacity="0.2"/><path d="M0 0L100 100" stroke="%23ffcc00" stroke-width="2" opacity="0.2"/><path d="M100 0L0 100" stroke="%23ffcc00" stroke-width="2" opacity="0.2"/></svg>');
+            background-size: cover;
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
+        /* Contacts Sidebar */
+        .contacts-sidebar {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .contacts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contacts-title {
+            color: var(--fifa-blue);
+            font-size: 1.2rem;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: #f9f9f9;
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            flex: 1;
+            padding: 5px;
+        }
+
+        .contacts-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-item:hover,
+        .contact-item.active {
+            background-color: #f0f0f0;
+        }
+
+        .contact-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--fifa-blue), #004987);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .contact-status {
+            font-size: 0.8rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-online {
+            color: var(--fifa-green);
+        }
+
+        .status-offline {
+            color: #999;
+        }
+
+        .unread-badge {
+            background-color: var(--fifa-red);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* Chat Container */
+        .chat-container {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1rem;
+        }
+
+        .current-contact-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--fifa-blue), #004987);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+
+        .current-contact-info {
+            flex: 1;
+        }
+
+        .current-contact-name {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--fifa-blue);
+        }
+
+        .current-contact-status {
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .chat-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .chat-action-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Chat Messages */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            display: flex;
+            max-width: 80%;
+        }
+
+        .message.received {
+            align-self: flex-start;
+        }
+
+        .message.sent {
+            align-self: flex-end;
+        }
+
+        .message-content {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+        }
+
+        .message.received .message-content {
+            background-color: #f0f0f0;
+            border-top-left-radius: 4px;
+        }
+
+        .message.sent .message-content {
+            background-color: var(--fifa-blue);
+            color: white;
+            border-top-right-radius: 4px;
+        }
+
+        .message-text {
+            margin-bottom: 5px;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            text-align: right;
+        }
+
+        /* Chat Input */
+        .chat-input-container {
+            display: flex;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            resize: none;
+            height: 45px;
+            font-family: inherit;
+        }
+
+        .chat-input:focus {
+            border-color: var(--fifa-blue);
+        }
+
+        .emoji-btn,
+        .send-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .emoji-btn {
+            background-color: #f0f0f0;
+        }
+
+        .emoji-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .send-btn {
+            background-color: var(--fifa-blue);
+            color: white;
+        }
+
+        .send-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--text-light);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .contacts-sidebar {
+                order: 2;
+            }
+
+            .chat-container {
+                order: 1;
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-img">F26</div>
+                <div class="logo-text">Copa Mundial 2026</div>
+            </div>
+            <ul class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="tournament.html">Torneo</a>
+                <a href="chat.html">Chat</a>
+                <a href="tasks.html">Tareas</a>
+                <a href="rewards.html">Recompensas</a>
+                <a href="login.html">Cerrar Sesión</a>
+            </ul>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Iniciar Sesión</a>
+                <a href="register.html" class="btn btn-primary">Registrarse</a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Chat Privado</h1>
+            <p>Conecta con otros fanáticos del fútbol en conversaciones privadas</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Contacts Sidebar -->
+        <aside class="contacts-sidebar">
+            <div class="contacts-header">
+                <h2 class="contacts-title">Contactos</h2>
+                <button class="chat-action-btn">
+                    <i class="fas fa-user-plus"></i>
+                </button>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar contactos...">
+            </div>
+
+            <div class="contacts-list">
+                <div class="contact-item active">
+                    <div class="contact-avatar">WP</div>
+                    <div class="contact-info">
+                        <div class="contact-name">William Perez</div>
+                        <div class="contact-status">
+                            <span class="status-online">●</span> En línea
+                        </div>
+                    </div>
+                    <div class="unread-badge">3</div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-avatar">LK</div>
+                    <div class="contact-info">
+                        <div class="contact-name">Luis Katz</div>
+                        <div class="contact-status">
+                            <span class="status-online">●</span> En línea
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-avatar">AC</div>
+                    <div class="contact-info">
+                        <div class="contact-name">Ana Conrad</div>
+                        <div class="contact-status">
+                            <span class="status-offline">●</span> Desconectado
+                        </div>
+                    </div>
+                    <div class="unread-badge">1</div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-avatar">JL</div>
+                    <div class="contact-info">
+                        <div class="contact-name">Johan Lieb</div>
+                        <div class="contact-status">
+                            <span class="status-online">●</span> En línea
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-avatar">RR</div>
+                    <div class="contact-info">
+                        <div class="contact-name">Roberto Rodríguez</div>
+                        <div class="contact-status">
+                            <span class="status-offline">●</span> Desconectado
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-avatar">SK</div>
+                    <div class="contact-info">
+                        <div class="contact-name">Suki Koto</div>
+                        <div class="contact-status">
+                            <span class="status-online">●</span> En línea
+                        </div>
+                    </div>
+                    <div class="unread-badge">5</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Chat Container -->
+        <main class="chat-container">
+            <div class="chat-header">
+                <div class="current-contact-avatar">WP</div>
+                <div class="current-contact-info">
+                    <div class="current-contact-name">William Perez</div>
+                    <div class="current-contact-status">
+                        <span class="status-online">●</span> En línea - Escribiendo...
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="chat-action-btn">
+                        <i class="fas fa-phone"></i>
+                    </button>
+                    <button class="chat-action-btn">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button class="chat-action-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-messages">
+                <div class="message received">
+                    <div class="message-content">
+                        <div class="message-text">¡Hola! ¿Viste el último partido de Argentina?</div>
+                        <div class="message-time">10:30 AM</div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-text">¡Sí! Fue increíble. Messi está en otro nivel.</div>
+                        <div class="message-time">10:32 AM</div>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <div class="message-content">
+                        <div class="message-text">¿Crees que pueden ganar el mundial este año?</div>
+                        <div class="message-time">10:33 AM</div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-text">Con toda seguridad. Tenemos el mejor equipo en años.</div>
+                        <div class="message-time">10:35 AM</div>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <div class="message-content">
+                        <div class="message-text">Ojalá tengas razón. ¡Vamos Argentina! 🇦🇷</div>
+                        <div class="message-time">10:36 AM</div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-text">¿Hiciste tus predicciones para los próximos partidos?</div>
+                        <div class="message-time">10:38 AM</div>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <div class="message-content">
+                        <div class="message-text">Todavía no. ¿Algún consejo?</div>
+                        <div class="message-time">10:40 AM</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <button class="emoji-btn">
+                    <i class="far fa-smile"></i>
+                </button>
+                <textarea class="chat-input" placeholder="Escribe un mensaje..."></textarea>
+                <button class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Proyecto de Programación Orientada a Internet - Grupo 051 - Agosto-Diciembre 2025</p>
+            <p>Lic. en Multimedia y Animación Digital - FCFM UANL</p>
+            <p>Primer Avance: Diseño y Maquetación de Interfaz</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
