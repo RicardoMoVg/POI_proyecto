@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reglas y Acuerdos de la Plataforma - FIFA 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --fifa-blue: #0066b3;
+            --fifa-yellow: #ffcc00;
+            --fifa-green: #009639;
+            --fifa-red: #e2001a;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --gradient: linear-gradient(135deg, var(--fifa-blue) 0%, #003b6f 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--gradient);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230066b3" opacity="0.2"/><path d="M0 0L100 100" stroke="%23ffcc00" stroke-width="2" opacity="0.2"/><path d="M100 0L0 100" stroke="%23ffcc00" stroke-width="2" opacity="0.2"/></svg>');
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .logo-img {
+            width: 70px;
+            height: 70px;
+            background: var(--fifa-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--fifa-blue);
+            font-size: 1.8rem;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+        }
+
+        .logo-text {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--fifa-yellow);
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+        }
+
+        .content-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            overflow: hidden;
+            text-align: justify;
+        }
+
+        .content-card h1 {
+            color: var(--fifa-blue);
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .content-card h2 {
+            color: var(--fifa-blue);
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eee;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-card h2::before {
+            content: '';
+            width: 4px;
+            height: 100%;
+            background-color: var(--fifa-yellow);
+            position: absolute;
+            left: -25px;
+            top: 0;
+            border-radius: 2px;
+        }
+
+        .content-card p {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .content-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .content-card ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .content-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--fifa-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn-primary {
+            padding: 15px 30px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 102, 179, 0.3);
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 102, 179, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 15px 30px;
+            background-color: #f0f0f0;
+            color: var(--fifa-blue);
+            border: 2px solid var(--fifa-blue);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="logo">
+            <div class="logo-img">F26</div>
+            <div class="logo-text">Copa Mundial 2026</div>
+        </div>
+
+        <div class="content-card">
+            <h1><i class="fas fa-gavel"></i> Reglas y Acuerdos de la Plataforma</h1>
+            <p>Bienvenido al simulador oficial de la Copa Mundial FIFA 2026. Para garantizar una experiencia positiva y segura para todos, te pedimos que leas y aceptes las siguientes reglas y acuerdos antes de continuar.</p>
+
+            <h2><i class="fas fa-bullhorn"></i> Propósito y Uso del Simulador</h2>
+            <p>La plataforma ha sido creada para la interacción entre fanáticos del fútbol, el seguimiento del torneo y la participación en pronósticos. El uso de la misma para fines no relacionados o comerciales está estrictamente prohibido.</p>
+            <ul>
+                <li>Participar en pronósticos de partidos y ganar recompensas.</li>
+                <li>Conectar con otros usuarios a través del chat grupal y privado.</li>
+                <li>Hacer uso de las videollamadas para interactuar con otros usuarios.</li>
+            </ul>
+
+            <h2><i class="fas fa-shield-alt"></i> Normas de Conducta y Contenido</h2>
+            <p>Se espera que todos los usuarios mantengan un ambiente respetuoso y positivo en todo momento. Cualquier violación de estas normas resultará en la suspensión o eliminación de la cuenta.</p>
+            <ul>
+                <li>No se permite el acoso, la intimidación o el discurso de odio.</li>
+                <li>El contenido violento, sexualmente explícito o ilegal está prohibido.</li>
+                <li>Está prohibido compartir información personal de otros usuarios sin su consentimiento.</li>
+                <li>No se tolerarán las amenazas, el spam o la suplantación de identidad.</li>
+            </ul>
+
+            <h2><i class="fas fa-user-lock"></i> Privacidad y Seguridad</h2>
+            <p>Nos tomamos muy en serio la privacidad de nuestros usuarios. Tus datos personales, incluyendo tu correo electrónico y contraseña, están protegidos y no serán compartidos con terceros sin tu consentimiento explícito.</p>
+            <ul>
+                <li>Tu información está encriptada y resguardada.</li>
+                <li>Puedes reportar a cualquier usuario o actividad sospechosa a través de la sección de soporte.</li>
+                <li>La eliminación de la cuenta es un proceso irreversible. Por favor, asegúrate antes de solicitarlo.</li>
+            </ul>
+
+            <div class="action-buttons">
+                <a href="#" class="btn-primary" onclick="window.history.back();">Acepto y Volver</a>
+                <a href="index.html" class="btn-secondary">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
