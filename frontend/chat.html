@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Grupal - Simulador FIFA 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --fifa-blue: #0066b3;
+            --fifa-yellow: #ffcc00;
+            --fifa-green: #009639;
+            --fifa-red: #e2001a;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --bg-gradient: linear-gradient(135deg, var(--fifa-blue) 0%, #003b6f 100%);
+            --header-bg: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Estilos generales y de tema (sin cambios) */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-dark); line-height: 1.6; min-height: 100vh; padding-bottom: 2rem; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        .bg-fifa-blue { background-color: var(--fifa-blue); }
+        .text-fifa-yellow { color: var(--fifa-yellow); }
+        .border-fifa-blue { border-color: var(--fifa-blue); }
+        header { background-color: var(--header-bg); color: var(--text-light); padding: 1rem 0; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; }
+        .nav-container, .logo, .nav-links, .auth-buttons { display: flex; align-items: center; }
+        .nav-container { justify-content: space-between; }
+        .logo { gap: 10px; }
+        .nav-links { list-style: none; gap: 1.5rem; }
+        .nav-links a { color: var(--text-light); text-decoration: none; transition: color 0.3s; font-weight: 500; }
+        .nav-links a:hover { color: var(--fifa-yellow); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #c5c5c5; border-radius: 10px; }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .chat-container { background-color: var(--card-bg); border-radius: 10px; box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+        .chat-sidebar { background-color: #f9fafb; border-right: 1px solid #e5e7eb; }
+        .chat-main { flex: 1; display: flex; flex-direction: column; }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-img">F26</div>
+                <div class="logo-text">Copa Mundial 2026</div>
+            </div>
+            <ul class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="teams.html">Equipos</a>
+                <a href="chat.html">Chat</a>
+                <a href="rewards.html">Recompensas</a>
+                <a href="tasks.html">Tareas</a>
+                <a href="login.html">Cerrar Sesión</a>
+            </ul>
+            <div class="auth-buttons">
+                </div>
+
+                
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-6">
+        <div class="flex flex-col md:flex-row gap-6 h-[80vh]">
+            <div class="w-full md:w-1/4 chat-container chat-sidebar">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold text-fifa-blue mb-4 flex items-center">
+                        <i class="fas fa-users mr-2"></i> Grupos y Usuarios
+                    </h2>
+                    <a href="creategroup.html" class="block w-full text-center py-2 mb-4 bg-fifa-blue text-white rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-plus-circle mr-2"></i> Crear Nuevo Grupo
+                    </a>
+                </div>
+                
+                <div class="mb-6 border-t border-gray-200 pt-4 px-4 custom-scrollbar overflow-y-auto">
+                    <h3 class="font-medium text-gray-700 mb-2">Mis grupos</h3>
+                    <div class="space-y-2" id="group-list">
+    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-4 mt-4 px-4 custom-scrollbar overflow-y-auto">
+                    <h3 class="font-medium text-gray-700 mb-2">Usuarios conectados</h3>
+                    <div class="space-y-2" id="user-list">
+                         </div>
+                </div>
+            </div>
+            
+            <div class="w-full md:w-3/4 chat-container chat-main">
+                <div class="bg-fifa-blue text-white px-6 py-4 flex justify-between items-center">
+                    <div class="flex-1">
+    <h2 class="text-xl font-bold" id="chat-header-title">Selecciona un chat</h2>
+    <p class="text-fifa-yellow" id="chat-header-description">Haz clic en un grupo o usuario para comenzar</p>
+</div>
+<button id="start-video-call" class="hidden w-12 h-12 bg-green-500 rounded-full hover:bg-green-600 transition text-white text-xl flex items-center justify-center" title="Iniciar videollamada">
+    <i class="fas fa-video"></i>
+</button>
+                </div>
+                
+                <div class="flex-1 p-4 overflow-y-auto custom-scrollbar" id="chat-messages">
+                    </div>
+                
+                <div class="border-t border-gray-200 p-4">
+                    <div class="flex items-center">
+                        <div class="flex-1 relative">
+                            <input type="text" placeholder="Escribe un mensaje..." class="w-full py-3 pl-4 pr-12 bg-gray-100 rounded-full focus:outline-none" id="message-input">
+                        </div>
+                        <button class="ml-3 w-12 h-12 rounded-full bg-fifa-blue hover:bg-blue-700 flex items-center justify-center transition" id="send-button">
+                            <i class="fas fa-paper-plane text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="call-notification" class="hidden fixed top-5 right-5 bg-white shadow-lg rounded-lg p-6 w-80 animate-fade-in z-50">
+    <div class="flex items-center mb-4">
+        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+            <i class="fas fa-phone-alt text-fifa-blue text-2xl"></i>
+        </div>
+        <div>
+            <h4 class="font-bold text-lg">Llamada entrante...</h4>
+            <p id="caller-name" class="text-gray-600">Alguien te está llamando.</p>
+        </div>
+    </div>
+    <div class="flex justify-end space-x-3">
+        <button id="decline-call" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Rechazar</button>
+        <button id="accept-call" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Aceptar</button>
+    </div>
+</div>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // --- 1. AUTENTICACIÓN Y CONFIGURACIÓN ---
+    const token = localStorage.getItem('authToken');
+    const userDataString = localStorage.getItem('userData');
+    if (!userDataString || !token) {
+        alert("Debes iniciar sesión para acceder al chat.");
+        window.location.href = 'login.html';
+        return;
+    }
+    const currentUser = JSON.parse(userDataString);
+    const socket = io('http://localhost:4000');
+    let currentRoom = null;
+    let incomingCallData = null;
+
+    // --- 2. REFERENCIAS AL DOM ---
+    const ui = {
+        messageInput: document.getElementById('message-input'),
+        sendButton: document.getElementById('send-button'),
+        chatMessages: document.getElementById('chat-messages'),
+        chatHeaderTitle: document.getElementById('chat-header-title'),
+        chatHeaderDescription: document.getElementById('chat-header-description'),
+        groupListContainer: document.getElementById('group-list'),
+        userListContainer: document.getElementById('user-list'),
+        startVideoCallButton: document.getElementById('start-video-call'),
+        callNotification: document.getElementById('call-notification'),
+        callerName: document.getElementById('caller-name'),
+        acceptCallButton: document.getElementById('accept-call'),
+        declineCallButton: document.getElementById('decline-call'),
+    };
+
+    // --- 3. FUNCIONES PRINCIPALES ---
+    async function joinRoom(roomName, description, isPrivate = false) {
+        if (roomName === currentRoom) return;
+        currentRoom = roomName;
+        socket.emit('joinRoom', currentRoom);
+        ui.chatHeaderTitle.textContent = description;
+        ui.chatHeaderDescription.textContent = isPrivate ? "Chat privado" : "Chat grupal";
+        ui.chatMessages.innerHTML = '';
+        ui.messageInput.focus();
+        
+        await fetchMessageHistory(roomName);
+        
+        ui.startVideoCallButton.classList.toggle('hidden', !isPrivate);
+
+        document.querySelectorAll('.clickable-item').forEach(item => {
+            const isSelected = item.dataset.room === roomName;
+            item.classList.toggle('bg-blue-100', isSelected);
+            item.classList.toggle('bg-white', !isSelected && item.classList.contains('user-item'));
+            item.classList.toggle('bg-gray-50', !isSelected && item.classList.contains('group-item'));
+        });
+    }
+
+    async function fetchMessageHistory(room) {
+        try {
+            const response = await fetch(`http://localhost:4000/api/messages/${room}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!response.ok) throw new Error('No se pudo cargar el historial.');
+            const history = await response.json();
+            history.forEach(msg => displayMessage(msg, msg.userId === currentUser.id));
+        } catch (error) { console.error('Error al cargar historial:', error); }
+    }
+
+    function sendMessage() {
+        const messageText = ui.messageInput.value.trim();
+        if (messageText === '' || !currentRoom) return;
+        const messageData = { room: currentRoom, userId: currentUser.id, user: currentUser.username, text: messageText, time: new Date().toISOString() };
+        socket.emit('sendMessage', messageData);
+        displayMessage(messageData, true);
+        ui.messageInput.value = '';
+    }
+
+    function displayMessage(data, isOwnMessage) {
+        const messageElement = document.createElement('div');
+        messageElement.className = `flex mb-4 animate-fade-in ${isOwnMessage ? 'justify-end' : ''}`;
+        const displayTime = new Date(data.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const displayName = isOwnMessage ? 'Tú' : data.user;
+        const initial = isOwnMessage ? currentUser.username.charAt(0).toUpperCase() : (data.user ? data.user.charAt(0).toUpperCase() : '?');
+        messageElement.innerHTML = isOwnMessage ?
+        `<div class="flex-1 max-w-xs">
+            <div class="flex items-baseline justify-end"><span class="mr-2 text-xs text-gray-500">${displayTime}</span><h4 class="font-medium">${displayName}</h4></div>
+            <div class="bg-fifa-blue text-white rounded-lg rounded-tr-none p-3 mt-1"><p>${data.text}</p></div>
+        </div>
+        <div class="flex-shrink-0 ml-3"><div class="w-10 h-10 rounded-full bg-fifa-yellow flex items-center justify-center"><span class="text-fifa-blue font-medium">${initial}</span></div></div>`
+        :
+        `<div class="flex-shrink-0 mr-3"><div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center"><span class="text-blue-800 font-medium">${initial}</span></div></div>
+        <div class="flex-1">
+            <div class="flex items-baseline"><h4 class="font-medium">${displayName}</h4><span class="ml-2 text-xs text-gray-500">${displayTime}</span></div>
+            <div class="bg-gray-100 rounded-lg rounded-tl-none p-3 mt-1"><p>${data.text}</p></div>
+        </div>`;
+        ui.chatMessages.appendChild(messageElement);
+        ui.chatMessages.scrollTop = ui.chatMessages.scrollHeight;
+    }
+
+    function renderGroup(group) {
+        const item = document.createElement('div');
+        item.className = 'clickable-item group-item p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-blue-100 transition';
+        item.dataset.room = group.id;
+        item.dataset.description = group.name;
+        item.innerHTML = `<h4 class="font-semibold">${group.name}</h4><p class="text-sm text-gray-500 truncate">${group.description || ''}</p>`;
+        ui.groupListContainer.appendChild(item);
+    }
+    
+    function renderUser(user) {
+        const item = document.createElement('div');
+        item.className = 'clickable-item user-item p-2 bg-white rounded-lg cursor-pointer hover:bg-blue-100 transition flex items-center';
+        const roomIds = [currentUser.id, user.id].sort();
+        item.dataset.room = `private-${roomIds.join('-')}`;
+        item.dataset.description = user.username;
+        item.dataset.userid = user.id; // Guardamos el ID del usuario para iniciar chats privados
+        item.innerHTML = `<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-3"><span class="font-bold text-gray-600">${user.username.charAt(0).toUpperCase()}</span></div><span class="font-medium">${user.username}</span>`;
+        ui.userListContainer.appendChild(item);
+    }
+    
+    async function fetchUsers() {
+        try {
+            const response = await fetch('http://localhost:4000/api/users', { headers: { 'Authorization': `Bearer ${token}` }});
+            if (!response.ok) throw new Error('No se pudo cargar la lista de usuarios.');
+            const users = await response.json();
+            ui.userListContainer.innerHTML = '';
+            users.forEach(renderUser);
+        } catch (error) { console.error(error); }
+    }
+
+    // --- 4. EVENTOS DE SOCKET ---
+    socket.on('connect', () => {
+        console.log('Conectado al servidor!');
+        socket.emit('registerUser', currentUser.id);
+        fetchUsers();
+    });
+    socket.on('initialGroupList', (groups) => {
+        ui.groupListContainer.innerHTML = '';
+        groups.forEach(renderGroup);
+    });
+    socket.on('newGroupAdded', renderGroup);
+    socket.on('receiveMessage', (data) => {
+        if (data.room === currentRoom && data.userId !== currentUser.id) {
+            displayMessage(data, false);
+        }
+    });
+
+    // Listeners para notificación de llamada
+    socket.on('llamada-entrante', (data) => {
+        incomingCallData = data;
+        ui.callerName.textContent = `Llamada de ${data.from.username || 'un usuario'}`;
+        ui.callNotification.classList.remove('hidden');
+    });
+    socket.on('llamada-fue-aceptada', (data) => {
+        ui.startVideoCallButton.innerHTML = '<i class="fas fa-video"></i>';
+        window.open(`videochat.html?room=${data.room}`, '_blank', 'width=800,height=600');
+    });
+    socket.on('llamada-fue-rechazada', () => {
+        alert("Tu llamada fue rechazada.");
+        ui.startVideoCallButton.innerHTML = '<i class="fas fa-video"></i>';
+    });
+    
+    // --- 5. EVENT LISTENERS DEL DOM ---
+    ui.sendButton.addEventListener('click', sendMessage);
+    ui.messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); sendMessage(); }
+    });
+    
+    document.querySelector('.chat-sidebar').addEventListener('click', (e) => {
+        const item = e.target.closest('.clickable-item');
+        if (item) {
+            joinRoom(item.dataset.room, item.dataset.description, item.classList.contains('user-item'));
+        }
+    });
+
+    ui.startVideoCallButton.addEventListener('click', () => {
+        if (currentRoom && currentRoom.startsWith('private-')) {
+            const roomIds = currentRoom.replace('private-', '').split('-');
+            const targetId = roomIds.find(id => parseInt(id) !== currentUser.id);
+            if(targetId) {
+                ui.startVideoCallButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                socket.emit('solicitud-de-llamada', { 
+                    targetId: parseInt(targetId), 
+                    room: currentRoom,
+                    from: { username: currentUser.username, socketId: socket.id }
+                });
+            }
+        }
+    });
+
+    ui.acceptCallButton.addEventListener('click', () => {
+        if (incomingCallData) {
+            socket.emit('llamada-aceptada', { toSocketId: incomingCallData.from.socketId, room: incomingCallData.room });
+            ui.callNotification.classList.add('hidden');
+            window.open(`videochat.html?room=${incomingCallData.room}`, '_blank', 'width=800,height=600');
+            incomingCallData = null;
+        }
+    });
+    ui.declineCallButton.addEventListener('click', () => {
+        if (incomingCallData) {
+            socket.emit('llamada-rechazada', { toSocketId: incomingCallData.from.socketId });
+            ui.callNotification.classList.add('hidden');
+            incomingCallData = null;
+        }
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recompensas - FIFA 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --fifa-blue: #0066b3;
+            --fifa-yellow: #ffcc00;
+            --fifa-green: #009639;
+            --fifa-red: #e2001a;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --bg-gradient: linear-gradient(135deg, var(--fifa-blue) 0%, #003b6f 100%);
+            --header-bg: rgba(0, 0, 0, 0.8);
+        }
+
+        [data-theme="dark"] {
+            --fifa-blue: #4a90e2;
+            --fifa-yellow: #ffd633;
+            --fifa-green: #00cc66;
+            --fifa-red: #ff4d4d;
+            --card-bg: #2d2d2d;
+            --text-dark: #f0f0f0;
+            --text-light: #f0f0f0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --bg-gradient: linear-gradient(135deg, #0d2b4b 0%, #00172D 100%);
+            --header-bg: rgba(0, 0, 0, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+    
+        header {
+            background-color: var(--header-bg);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: var(--fifa-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--fifa-blue);
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--fifa-yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--fifa-yellow);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--fifa-yellow);
+            color: var(--fifa-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: #e6b800;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--fifa-yellow);
+            color: var(--fifa-yellow);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--fifa-yellow);
+            color: var(--fifa-blue);
+        }
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            margin-left: 15px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--fifa-blue);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+     
+        .hero {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230066b3" opacity="0.2"/><path d="M0 0L100 100" stroke="%23ffcc00" stroke-width="2" opacity="0.2"/><path d="M100 0L0 100" stroke="%23ffcc00" stroke-width="2" opacity="0.2"/></svg>');
+            background-size: cover;
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+       
+        .main-content {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-section h3 {
+            color: var(--fifa-blue);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--fifa-yellow);
+            padding-bottom: 0.5rem;
+        }
+
+        .user-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-online {
+            color: var(--fifa-green);
+            font-weight: bold;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-area {
+            flex: 1;
+        }
+
+        .tab-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .tabs {
+            display: flex;
+            list-style: none;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .tab-link {
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-link.active {
+            color: var(--fifa-blue);
+            border-bottom-color: var(--fifa-blue);
+        }
+
+        .rewards-container {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .rewards-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .rewards-title {
+            color: var(--fifa-blue);
+            font-size: 1.5rem;
+        }
+
+        .progress-container {
+            color: var(--text-dark);
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-5px);
+        }
+
+        .badge-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge h3 {
+            color: var(--fifa-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .badge p {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .win-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--fifa-blue);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .win-btn:hover {
+            background-color: #005596;
+        }
+
+        .badge-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .badge-title {
+            font-weight: bold;
+            color: var(--fifa-blue);
+        }
+
+        .badge-type {
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .type-daily {
+            background-color: var(--fifa-green);
+            color: white;
+        }
+
+        .type-weekly {
+            background-color: var(--fifa-blue);
+            color: white;
+        }
+
+        .badge-description {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .progress-section {
+            margin-top: 1rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar-container {
+            background-color: #e5e7eb;
+            border-radius: 10px;
+            height: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            background-color: var(--fifa-blue);
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .badge-rewards {
+            margin-bottom: 1rem;
+        }
+
+        .rewards-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .reward-item {
+            background-color: var(--fifa-yellow);
+            color: var(--fifa-blue);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--fifa-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+     
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .chat-header {
+            background-color: var(--fifa-blue);
+            color: white;
+            padding: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .online-indicator {
+            width: 8px;
+            height: 8px;
+            background-color: var(--fifa-green);
+            border-radius: 50%;
+        }
+
+        .online-count {
+            font-size: 0.8rem;
+        }
+
+        .chat-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            padding: 1rem;
+            background-color: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+        }
+
+        .message.self {
+            text-align: right;
+        }
+
+        .sender {
+            font-weight: bold;
+            color: var(--fifa-blue);
+            margin-bottom: 0.2rem;
+        }
+
+        .text {
+            background-color: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+            display: inline-block;
+            max-width: 80%;
+        }
+
+        .message.self .text {
+            background-color: var(--fifa-blue);
+            color: white;
+        }
+
+        .timestamp {
+            font-size: 0.7rem;
+            color: #6b7280;
+            margin-top: 0.2rem;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 0.8rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+        }
+
+        .chat-input button {
+            background-color: var(--fifa-blue);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+
+
+
+        @media (max-width: 900px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .badges-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .rewards-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .chat-widget {
+                width: 250px;
+                right: 10px;
+                bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Actualizado -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-img">F26</div>
+                <div class="logo-text">Copa Mundial 2026</div>
+            </div>
+            <ul class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="teams.html">Equipos</a>
+                <a href="chat.html">Chat</a>
+                <a href="rewards.html">Recompensas</a>
+                <a href="tasks.html">Tareas</a>
+                <a href="login.html">Cerrar Sesión</a>
+            </ul>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Iniciar Sesión</a>
+                <a href="register.html" class="btn btn-primary">Registrarse</a>
+                <label class="theme-switch" title="Cambiar modo oscuro/claro">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Sistema de Recompensas FIFA 2026</h1>
+            <p>Gana insignias y premios exclusivos por tus predicciones y conocimientos futbolísticos</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Mi Perfil</h3>
+                <div class="user-status">
+                    <span class="status-online">●</span>
+                    <span>Nivel: 15</span>
+                </div>
+                <div class="user-status">
+                    <span>🏆</span>
+                    <span>Puntos: 1,250</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Menú</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="chat.html"><span>⚽</span> Chat</a></li>
+                    <li><a href="tournament.html"><span>🏆</span> Torneos</a></li>
+                    <li><a href="rewards.html"><span>⭐</span> Recompensas</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Logros</h3>
+                <ul class="sidebar-menu">
+                    <li><span>🥇</span> Insignias: 5</li>
+                    <li><span>🎯</span> Precisión: 78%</li>
+                    <li><span>⚡</span> Racha: 3 aciertos</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content-area">
+            <div class="tab-container">
+                <ul class="tabs">
+                    <li><a href="#" class="tab-link active" data-tab="insignias">Insignia</a></li>
+                    <li><a href="#" class="tab-link" data-tab="premios">Premios</a></li>
+                    <li><a href="#" class="tab-link" data-tab="desafios">Desafios</a></li>
+                </ul>
+            </div>
+
+            <!-- Insignias -->
+
+            <div id="insignias" class="rewards-container tab-content active">
+                <div class="rewards-header">
+                    <h2 class="rewards-title">Insignias Disponibles</h2>
+                    <div class="progress-container">
+                        <span class="progress-text">Progreso: 5/12 insignias</span>
+                    </div>
+                </div>
+
+                <div class="badges-grid">
+                    <div class="badge">
+                        <div class="badge-icon">🥇</div>
+                        <h3>Goleador</h3>
+                        <p>Por predecir 10 resultados exactos</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🔮</div>
+                        <h3>Vidente</h3>
+                        <p>Por acertar el campeón del torneo</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🎯</div>
+                        <h3>Precisión</h3>
+                        <p>Por tener 85% de predicciones correctas</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">⚡</div>
+                        <h3>Rápido</h3>
+                        <p>Por hacer 5 predicciones en menos de 1 minuto</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🌎</div>
+                        <h3>Global</h3>
+                        <p>Por predecir partidos de todos los grupos</p>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🏅</div>
+                        <h3>Experto</h3>
+                        <p>Por alcanzar el top 100 en la clasificación</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premios -->
+
+            <div id="premios" class="rewards-container tab-content">
+                <div class="rewards-header">
+                    <h2 class="rewards-title">Premios</h2>
+                    <div class="progress-container">
+                        <span class="progress-text">Total: 10 premios</span>
+                    </div>
+                </div>
+
+                <div class="badges-grid">
+                    <div class="badge">
+                        <div class="badge-icon">⚡</div>
+                        <h3>Mejoras</h3>
+                        <p>Modo turbo</p>
+                        <p>+25% velocidad todo el equipo</p>
+                        <span class="progress-text">Uso en 3 partidos</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">⚔</div>
+                        <h3>Defensa impenetrable</h3>
+                        <p>Bloquea 70% <br>de ataques rivales</p>
+                        <span class="progress-text">Usos en 5 partidos</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🎯</div>
+                        <h3>Precisión láser</h3>
+                        <p>95% Precisión de tiro</p>
+                        <span class="progress-text">Usos en 2 partidos</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">💰</div>
+                        <h3>Monedas</h3>
+                        <p>Moneda de oro</p>
+                        <span class="progress-text">Compra 100 monedas a tan solo $69</span>
+                        <button class="win-btn">Comprar</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">💎</div>
+                        <h3>Gema especial</h3>
+                        <p>Para obtener <br> equipamiento exclusivo </p>
+                        <span class="progress-text">Compra 10 gemas a tan solo $199</span>
+                        <button class="win-btn">Comprar</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">👔</div>
+                        <h3>Equipamiento</h3>
+                        <p>Camiseta Retro Brasil 70</p>
+                        <p>Legendaria camiseta amarilla</p>
+                        <span class="progress-text">Nivel: Legendario</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">👟</div>
+                        <h3>Calzado</h3>
+                        <p>Botas de velocidad</p>
+                        <p>+15% velocidad por 5 partidos</p>
+                        <span class="progress-text">Nivel: Épica</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">⚽</div>
+                        <h3>Balón FIFA Mundial</h3>
+                        <p>Balón oficial con efectos <br> especiales en el partido</p>
+                        <span class="progress-text">Nivel: Rara</span>
+                        
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🃏</div>
+                        <h3>Carta especial</h3>
+                        <p>Messi GOAT</p>
+                        <p>Carta especial del mejor</p>
+                        <span class="progress-text">Nivel: Legendario</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🏟</div>
+                        <h3>Ambiente</h3>
+                        <p>Wembley</p>
+                        <p>Ambiente de final épica</p>
+                        <span class="progress-text">Nivel: Rara</span>
+                        <button class="win-btn">Obtener</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desafios -->
+
+            <div id="desafios" class="rewards-container tab-content">
+                <div class="rewards-header">
+                    <h2 class="rewards-title">Desafíos</h2>
+                    <div class="progress-container">
+                        <span class="progress-text">Retos por lograr: 6</span>
+                    </div>
+                </div>
+
+                <div class="badges-grid">
+
+                    <!-- Regates -->
+                    <div class="badge">
+                        <div class="badge-icon">⚡</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Velocidad Pura</div>
+                            <span class="badge-type type-daily">Diario</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Completa 15 regates exitosos en un solo partido. Demuestra tu habilidad con el balón.
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Regates completados</span>
+                                <span>8/15</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 53%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">Boost velocidad</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                    <!-- Pases -->
+                    <div class="badge">
+                        <div class="badge-icon">🎯</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Maestro del Pase</div>
+                            <span class="badge-type type-daily">Diario</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Realiza 20 pases acertados en un solo partido. Juega en equipo y mantén la posesión.
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Pases completados</span>
+                                <span>12/20</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 60%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">+ Precisión</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                    <!-- Tiros a puerta -->
+                    <div class="badge">
+                        <div class="badge-icon">🥅</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Puntería Letal</div>
+                            <span class="badge-type type-weekly">Semanal</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Dispara 10 veces a portería en un partido. No importa si marcas, ¡lo importante es
+                            intentarlo!
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Tiros realizados</span>
+                                <span>4/10</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 40%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">+ Potencia de tiro</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                    <!-- Recuperaciones -->
+                    <div class="badge">
+                        <div class="badge-icon">🛡️</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Muralla Defensiva</div>
+                            <span class="badge-type type-daily">Diario</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Recupera 5 balones en defensa durante un partido. Sé firme y protege tu área.
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Recuperaciones</span>
+                                <span>2/5</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 40%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">+ Resistencia</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                    <!-- Resistencia -->
+                    <div class="badge">
+                        <div class="badge-icon">🏃‍♂️</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Corazón Incansable</div>
+                            <span class="badge-type type-weekly">Semanal</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Corre 5 km acumulados en un partido. Mantente activo de principio a fin.
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Kilómetros recorridos</span>
+                                <span>3/5</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 60%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">+ Energía</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                    <!-- Centros -->
+                    <div class="badge">
+                        <div class="badge-icon">📐</div>
+                        <div class="badge-info">
+                            <div class="badge-title">Centrador Preciso</div>
+                            <span class="badge-type type-daily">Diario</span>
+                        </div>
+
+                        <div class="badge-description">
+                            Realiza 5 centros correctos al área en un partido. Abre el juego por las bandas.
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Centros completados</span>
+                                <span>1/5</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 20%;"></div>
+                            </div>
+                            <div class="badge-rewards">
+                                <div class="rewards-list">
+                                    <span class="reward-item">+ Técnica</span>
+                                </div>
+                            </div>
+                            <button class="action-btn">Aceptar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget chat-expanded">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-comments"></i>
+                <span>Chat en Vivo</span>
+                <span class="online-indicator"></span>
+                <span class="online-count">(24)</span>
+            </div>
+            <button class="chat-toggle">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+        <div class="chat-messages">
+            <div class="message other">
+                <div class="sender">FutbolFan23 <span class="badge">🥇</span></div>
+                <div class="text">¡Argentina va a ganar el mundial!</div>
+                <div class="timestamp">Hace 2 min</div>
+            </div>
+            <div class="message self">
+                <div class="sender">Tú <span class="badge">🔮</span></div>
+                <div class="text">Yo creo que Brasil tiene más chances este año</div>
+                <div class="timestamp">Hace 1 min</div>
+            </div>
+            <div class="message other">
+                <div class="sender">PredicctorPro <span class="badge">🏅</span></div>
+                <div class="text">Acabo de conseguir la insignia Vidente 🔮</div>
+                <div class="timestamp">Hace 1 min</div>
+            </div>
+            <div class="message other">
+                <div class="sender">Messi10</div>
+                <div class="text">¿Alguien más cree que Brasil llegará a semifinales?</div>
+                <div class="timestamp">Ahora</div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Escribe un mensaje...">
+            <button><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+
+    <script>
+        // Funcionalidad para el interruptor de tema
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Obtener el tema guardado o usar la preferencia del sistema
+            const currentTheme = localStorage.getItem('theme') || 
+                                (prefersDarkScheme.matches ? 'dark' : 'light');
+            
+            // Aplicar el tema al cargar la página
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.checked = true;
+            }
+            
+            // Cambiar tema cuando el usuario interactúa con el interruptor
+            themeToggle.addEventListener('change', function() {
+                let theme = 'light';
+                if (this.checked) {
+                    theme = 'dark';
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+                localStorage.setItem('theme', theme);
+            });
+            
+            // Escuchar cambios en la preferencia del sistema
+            prefersDarkScheme.addEventListener('change', e => {
+                const newTheme = e.matches ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+                
+                if (newTheme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.checked = true;
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.checked = false;
+                }
+            });
+
+            // Funcionalidad de pestañas
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remover clase active de todos los links y contenidos
+                    tabLinks.forEach(l => l.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Agregar clase active al link clickeado
+                    this.classList.add('active');
+                    
+                    // Mostrar el contenido correspondiente
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Funcionalidad del chat
+            const chatToggle = document.querySelector('.chat-toggle');
+            const chatWidget = document.querySelector('.chat-widget');
+            
+            chatToggle.addEventListener('click', function() {
+                chatWidget.classList.toggle('chat-expanded');
+                const icon = this.querySelector('i');
+                if (chatWidget.classList.contains('chat-expanded')) {
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                } else {
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                }
+            });
+
+            // Simular envío de mensajes
+            const chatInput = document.querySelector('.chat-input input');
+            const chatButton = document.querySelector('.chat-input button');
+            const chatMessages = document.querySelector('.chat-messages');
+            
+            chatButton.addEventListener('click', function() {
+                if (chatInput.value.trim() !== '') {
+                    const messageElement = document.createElement('div');
+                    messageElement.className = 'message self';
+                    messageElement.innerHTML = `
+                        <div class="sender">Tú <span class="badge">🔮</span></div>
+                        <div class="text">${chatInput.value}</div>
+                        <div class="timestamp">Ahora</div>
+                    `;
+                    chatMessages.appendChild(messageElement);
+                    chatInput.value = '';
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            });
+            
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    chatButton.click();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

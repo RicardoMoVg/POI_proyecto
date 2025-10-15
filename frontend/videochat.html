@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Videollamada - FIFA 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        video { transform: scaleX(-1); } /* Efecto espejo para verse natural */
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col h-screen">
+
+    <div class="relative flex-1 flex items-center justify-center">
+        <video id="remote-video" autoplay playsinline class="h-full w-full object-cover"></video>
+
+        <div class="absolute bottom-4 right-4 w-1/4 max-w-xs border-2 border-gray-500 rounded-lg overflow-hidden">
+            <video id="local-video" autoplay playsinline muted class="w-full"></video>
+        </div>
+    </div>
+
+    <div class="bg-gray-800 p-4 flex justify-center items-center space-x-6">
+        <button id="toggle-mic" class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-2xl">
+            <i class="fas fa-microphone"></i>
+        </button>
+        <button id="hang-up" class="w-20 h-16 bg-red-600 rounded-full flex items-center justify-center text-3xl">
+            <i class="fas fa-phone-slash"></i>
+        </button>
+        <button id="toggle-camera" class="w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center text-2xl">
+            <i class="fas fa-video"></i>
+        </button>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="js/videochat.js"></script> </body>
+</html>

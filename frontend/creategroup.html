@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nuevo Grupo - Simulador FIFA 2026</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --fifa-blue: #0066b3;
+            --fifa-yellow: #ffcc00;
+            --fifa-green: #009639;
+            --fifa-red: #e2001a;
+        }
+        
+        .bg-fifa-blue { background-color: var(--fifa-blue); }
+        .text-fifa-yellow { color: var(--fifa-yellow); }
+        .border-fifa-blue { border-color: var(--fifa-blue); }
+        
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        input[type="checkbox"] {
+            accent-color: var(--fifa-blue);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <nav class="bg-fifa-blue text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-futbol text-fifa-yellow text-2xl"></i>
+                    <span class="text-xl font-bold">Simulador FIFA 2026</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-fifa-yellow transition">Inicio</a>
+                    <a href="tournament.html" class="hover:text-fifa-yellow transition">Torneo</a>
+                    <a href="chat.html" class="text-fifa-yellow font-bold border-b-2 border-fifa-yellow">Chat</a>
+                    <a href="tasks.html" class="hover:text-fifa-yellow transition">Tareas</a>
+                    <a href="rewards.html" class="hover:text-fifa-yellow transition">Recompensas</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="flex items-center focus:outline-none">
+                            <div class="w-8 h-8 rounded-full bg-fifa-yellow flex items-center justify-center">
+                                <span class="text-fifa-blue font-bold">U</span>
+                            </div>
+                            <span class="ml-2">Usuario2026</span>
+                            <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-6">
+        <div class="max-w-3xl mx-auto">
+    
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                <div class="flex items-center mb-4">
+                    <a href="chat.html" class="text-fifa-blue hover:text-blue-700 mr-3">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <h1 class="text-2xl font-bold text-fifa-blue">
+                        <i class="fas fa-plus-circle mr-2"></i> Crear Nuevo Grupo
+                    </h1>
+                </div>
+                <p class="text-gray-600">Crea un nuevo grupo de chat para discutir sobre partidos, estrategias y más.</p>
+            </div>
+    
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6">
+                    <form id="create-group-form">
+
+                        <div class="mb-6">
+                            <label for="group-name" class="block text-gray-700 font-medium mb-2">
+                                Nombre del Grupo <span class="text-red-500">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="group-name" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fifa-blue focus:border-transparent transition"
+                                placeholder="Ej: Grupo A, Amigos, Equipo Fantástico..."
+                                required
+                            >
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="group-description" class="block text-gray-700 font-medium mb-2">
+                                Descripción
+                            </label>
+                            <textarea 
+                                id="group-description" 
+                                rows="3"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fifa-blue focus:border-transparent transition"
+                                placeholder="Describe el propósito de este grupo..."
+                            ></textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">
+                                Privacidad del Grupo
+                            </label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                                    <input type="radio" id="public-group" name="privacy" value="public" class="mr-3" checked>
+                                    <label for="public-group" class="flex-1 cursor-pointer">
+                                        <h4 class="font-medium">Público</h4>
+                                        <p class="text-sm text-gray-600">Cualquiera puede unirse al grupo</p>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                                    <input type="radio" id="private-group" name="privacy" value="private" class="mr-3">
+                                    <label for="private-group" class="flex-1 cursor-pointer">
+                                        <h4 class="font-medium">Privado</h4>
+                                        <p class="text-sm text-gray-600">Solo por invitación</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <label class="block text-gray-700 font-medium">
+                                    Seleccionar Miembros <span class="text-red-500">*</span>
+                                </label>
+                                <div class="flex items-center">
+                                    <input 
+                                        type="text" 
+                                        placeholder="Buscar usuarios..." 
+                                        class="text-sm px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-fifa-blue"
+                                        id="search-users"
+                                    >
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-300 rounded-lg overflow-hidden">
+                                <div class="max-h-64 overflow-y-auto custom-scrollbar">
+               
+                                    <div class="divide-y divide-gray-200" id="user-list-container"></div>
+                                        
+            
+                                        <div class="flex items-center p-4 hover:bg-gray-50 transition">
+                                            <input type="checkbox" id="user-2" class="mr-3 h-5 w-5 text-fifa-blue">
+                                            <label for="user-2" class="flex-1 flex items-center cursor-pointer">
+                                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                                    <span class="text-green-800 font-medium">M</span>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">México2026</h4>
+                                                    <p class="text-sm text-gray-500">En línea</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                                        <!-- Usuario 3 -->
+                                        <div class="flex items-center p-4 hover:bg-gray-50 transition">
+                                            <input type="checkbox" id="user-3" class="mr-3 h-5 w-5 text-fifa-blue">
+                                            <label for="user-3" class="flex-1 flex items-center cursor-pointer">
+                                                <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                                                    <span class="text-red-800 font-medium">B</span>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">BrasilGol</h4>
+                                                    <p class="text-sm text-gray-500">En línea</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                                        
+                                        <div class="flex items-center p-4 hover:bg-gray-50 transition">
+                                            <input type="checkbox" id="user-4" class="mr-3 h-5 w-5 text-fifa-blue">
+                                            <label for="user-4" class="flex-1 flex items-center cursor-pointer">
+                                                <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                                    <span class="text-purple-800 font-medium">G</span>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">GermanyFC</h4>
+                                                    <p class="text-sm text-gray-500">Desconectado</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                                 
+                                        <div class="flex items-center p-4 hover:bg-gray-50 transition">
+                                            <input type="checkbox" id="user-5" class="mr-3 h-5 w-5 text-fifa-blue">
+                                            <label for="user-5" class="flex-1 flex items-center cursor-pointer">
+                                                <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
+                                                    <span class="text-yellow-800 font-medium">E</span>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">España2026</h4>
+                                                    <p class="text-sm text-gray-500">En línea</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                       
+                                        <div class="flex items-center p-4 hover:bg-gray-50 transition">
+                                            <input type="checkbox" id="user-6" class="mr-3 h-5 w-5 text-fifa-blue">
+                                            <label for="user-6" class="flex-1 flex items-center cursor-pointer">
+                                                <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
+                                                    <span class="text-indigo-800 font-medium">F</span>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium">FranceGoal</h4>
+                                                    <p class="text-sm text-gray-500">Desconectado</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <p class="text-sm text-gray-500 mt-2">Selecciona al menos un miembro para crear el grupo.</p>
+                        </div>
+          
+                        <div class="flex justify-end space-x-4 pt-4 border-t border-gray-200">
+                            <a href="chat.html" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
+                                Cancelar
+                            </a>
+                            <button type="submit" class="px-6 py-3 bg-fifa-blue text-white rounded-lg hover:bg-blue-700 transition flex items-center">
+                                <i class="fas fa-plus-circle mr-2"></i> Crear Grupo
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    // --- 1. AUTENTICACIÓN Y CONFIGURACIÓN ---
+    const token = localStorage.getItem('authToken');
+    const userData = JSON.parse(localStorage.getItem('userData'));
+
+    if (!token || !userData) {
+        alert("Debes iniciar sesión para crear un grupo.");
+        window.location.href = 'login.html';
+        return;
+    }
+
+    const socket = io('http://localhost:4000');
+    const form = document.getElementById('create-group-form');
+    const userListContainer = document.getElementById('user-list-container');
+    const searchInput = document.getElementById('search-users');
+
+    // --- 2. CARGAR USUARIOS DESDE LA API ---
+    async function fetchAndRenderUsers() {
+        try {
+            const response = await fetch('http://localhost:4000/api/users', {
+                headers: {
+                    // ¡Clave! Enviamos el token para autenticarnos
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('No se pudo cargar la lista de usuarios.');
+            }
+
+            const users = await response.json();
+            renderUsers(users);
+
+        } catch (error) {
+            console.error(error);
+            userListContainer.innerHTML = '<p class="p-4 text-red-500">Error al cargar usuarios.</p>';
+        }
+    }
+
+    // --- 3. RENDERIZAR LA LISTA DE USUARIOS ---
+    function renderUsers(users) {
+        userListContainer.innerHTML = ''; // Limpiar la lista
+        if (users.length === 0) {
+             userListContainer.innerHTML = '<p class="p-4 text-gray-500">No hay otros usuarios registrados.</p>';
+             return;
+        }
+
+        users.forEach(user => {
+            const userElement = document.createElement('div');
+            userElement.className = 'user-item flex items-center p-4 hover:bg-gray-50 transition';
+            
+            userElement.innerHTML = `
+                <input type="checkbox" id="user-${user.id}" data-userid="${user.id}" class="mr-3 h-5 w-5 text-fifa-blue">
+                <label for="user-${user.id}" class="flex-1 flex items-center cursor-pointer">
+                    <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                        <span class="font-medium text-gray-600">${user.username.charAt(0).toUpperCase()}</span>
+                    </div>
+                    <div>
+                        <h4 class="font-medium">${user.username}</h4>
+                    </div>
+                </label>
+            `;
+            userListContainer.appendChild(userElement);
+        });
+    }
+    
+    // --- 4. LÓGICA DEL BUSCADOR ---
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const allUsers = document.querySelectorAll('.user-item');
+        allUsers.forEach(userElement => {
+            const username = userElement.querySelector('h4').textContent.toLowerCase();
+            if (username.includes(searchTerm)) {
+                userElement.style.display = 'flex';
+            } else {
+                userElement.style.display = 'none';
+            }
+        });
+    });
+
+    // --- 5. LÓGICA DE ENVÍO DEL FORMULARIO ---
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const groupName = document.getElementById('group-name').value.trim();
+        const members = [userData.id]; // El creador siempre es miembro
+        
+        const selectedUsers = document.querySelectorAll('#user-list-container input[type="checkbox"]:checked');
+        selectedUsers.forEach(checkbox => {
+            members.push(parseInt(checkbox.dataset.userid)); // Convertir a número
+        });
+
+        if (groupName && members.length > 1) {
+            socket.emit('createGroup', { name: groupName, members });
+            alert(`Grupo "${groupName}" creado exitosamente.`);
+            window.location.href = 'chat.html';
+        } else {
+            alert('Por favor, ingresa un nombre y selecciona al menos un miembro.');
+        }
+    });
+
+    // --- INICIALIZACIÓN ---
+    fetchAndRenderUsers();
+});
+</script>
+</body>
+</html>
